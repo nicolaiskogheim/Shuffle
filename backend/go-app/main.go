@@ -1975,7 +1975,7 @@ func handlePasswordChange(resp http.ResponseWriter, request *http.Request) {
 		if len(users) != 1 {
 			log.Printf(`Found multiple users with the same username: %s: %d`, t.Username, len(users))
 			resp.WriteHeader(401)
-			resp.Write([]byte(fmt.Sprintf(`{"success": false, "reason": "Found %d users with the same username: %s (%d)"}`, len(users), t.Username)))
+			resp.Write([]byte(fmt.Sprintf(`{"success": false, "reason": "Found %d users with the same username: %s"}`, len(users), t.Username)))
 			return
 		}
 
@@ -2298,7 +2298,7 @@ func handleLogin(resp http.ResponseWriter, request *http.Request) {
 	}
 
 	if !Userdata.Active {
-		log.Printf("%s is not active, but tried to login", data.Username, err)
+		log.Printf("%s is not active, but tried to login. Error: %v", data.Username, err)
 		resp.WriteHeader(401)
 		resp.Write([]byte(`{"success": false, "reason": "This user is deactivated"}`))
 		return
@@ -4909,7 +4909,7 @@ func handleGetSpecificStats(resp http.ResponseWriter, request *http.Request) {
 
 	b, err := json.Marshal(statisticsItem)
 	if err != nil {
-		log.Println("Failed to marshal data: %s", err)
+		log.Printf("Failed to marshal data: %s", err)
 		resp.WriteHeader(401)
 		return
 	}

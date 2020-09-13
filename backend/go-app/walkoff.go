@@ -4321,7 +4321,7 @@ func handleAppHotloadRequest(resp http.ResponseWriter, request *http.Request) {
 	err = handleAppHotload(location, true)
 	if err != nil {
 		resp.WriteHeader(500)
-		resp.Write([]byte(fmt.Sprintf(`{"success": false, "reason": "Failed loading apps: %s"}`)))
+		resp.Write([]byte(fmt.Sprintf(`{"success": false, "reason": "Failed loading apps"}`)))
 		return
 	}
 
