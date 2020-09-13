@@ -16,10 +16,10 @@ import (
 	"time"
 
 	"cloud.google.com/go/datastore"
-	"cloud.google.com/go/scheduler/apiv1"
+	scheduler "cloud.google.com/go/scheduler/apiv1"
 	gyaml "github.com/ghodss/yaml"
 	"github.com/h2non/filetype"
-	"github.com/satori/go.uuid"
+	uuid "github.com/satori/go.uuid"
 	"google.golang.org/api/cloudfunctions/v1"
 	schedulerpb "google.golang.org/genproto/googleapis/cloud/scheduler/v1"
 
