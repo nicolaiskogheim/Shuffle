@@ -3078,6 +3078,11 @@ func handleWebhookCallback(resp http.ResponseWriter, request *http.Request) {
 	// 2. Load the configuration
 	// 3. Execute the workflow
 
+	cors := handleCors(resp, request)
+	if cors {
+		return
+	}
+
 	path := strings.Split(request.URL.String(), "/")
 	if len(path) < 4 {
 		resp.WriteHeader(403)
@@ -4155,6 +4160,11 @@ func findAvailablePorts(startRange int64, endRange int64) string {
 }
 
 func handleSendalert(resp http.ResponseWriter, request *http.Request) {
+	cors := handleCors(resp, request)
+	if cors {
+		return
+	}
+
 	user, err := handleApiAuthentication(resp, request)
 	if err != nil {
 		log.Printf("Api authentication failed in getworkflows: %s", err)
@@ -4583,6 +4593,11 @@ func getOutlookProfile(client *http.Client) (OutlookProfile, error) {
 }
 
 func handleNewOutlookRegister(resp http.ResponseWriter, request *http.Request) {
+	cors := handleCors(resp, request)
+	if cors {
+		return
+	}
+
 	code := request.URL.Query().Get("code")
 	if len(code) == 0 {
 		log.Println("No code")
